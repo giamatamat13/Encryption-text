@@ -20,13 +20,7 @@
         flex-direction: column;
         background-image: linear-gradient(135deg, #f4f7fc 30%, #a7c5eb 70%);
     }
-    .content {
-        margin-top: 20px;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+    .content { margin-top: 20px; width: 100%; display: flex; flex-direction: column; align-items: center; }
     h1 {
         font-size: 2.5em;
         color: #ffffff;
@@ -38,45 +32,14 @@
         border-radius: 10px 10px 0 0;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
-    .version {
-        font-size: 0.9em;
-        color: #ffffff;
-        background-color: #4CAF50;
-        padding: 0 20px 10px;
-        border-radius: 0 0 10px 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-        margin-bottom: 20px;
-    }
-    label {
-        font-size: 1.2em;
-        font-weight: bold;
-        display: block;
-        margin-bottom: 10px;
-        text-transform: uppercase;
-    }
+    .version { font-size: 0.9em; color: #ffffff; background-color: #4CAF50; padding: 0 20px 10px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); margin-bottom: 20px; }
+    label { font-size: 1.2em; font-weight: bold; display: block; margin-bottom: 10px; text-transform: uppercase; }
     input, textarea, select {
-        width: 100%;
-        padding: 12px;
-        margin-bottom: 20px;
-        border: 2px solid #ddd;
-        border-radius: 10px;
-        font-size: 16px;
-        background-color: #fff;
-        transition: all 0.3s ease;
-        box-sizing: border-box;
+        width: 100%; padding: 12px; margin-bottom: 20px; border: 2px solid #ddd;
+        border-radius: 10px; font-size: 16px; background-color: #fff; transition: all 0.3s ease; box-sizing: border-box;
     }
-    input:focus, textarea:focus, select:focus {
-        border-color: #4CAF50;
-        box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
-        background-color: #f1fdf4;
-    }
-    textarea {
-        min-height: 100px;
-        background-color: #f9f9f9;
-        border: 1px solid #ccc;
-        color: #555;
-        resize: vertical;
-    }
+    input:focus, textarea:focus, select:focus { border-color: #4CAF50; box-shadow: 0 0 8px rgba(76, 175, 80, 0.5); background-color: #f1fdf4; }
+    textarea { min-height: 100px; background-color: #f9f9f9; border: 1px solid #ccc; color: #555; resize: vertical; }
     .copy-button {
         background-color: #008CBA;
         color: white;
@@ -91,37 +54,18 @@
         align-items: center;
         margin-left: 10px;
     }
-    .copy-button:hover {
-        background-color: #007bb5;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-        transform: translateY(-2px);
-    }
-    .copy-button:active {
-        background-color: #005f8a;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        transform: translateY(2px);
-    }
-    .input-group {
-        margin-bottom: 20px;
-        width: 100%;
-        max-width: 600px;
-    }
-    .field-with-button {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    #monoKey {
-        font-family: 'Courier New', monospace;
-        white-space: pre;
-        -webkit-text-security: disc;
-    }
+    .copy-button:hover { background-color: #007bb5; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); transform: translateY(-2px); }
+    .copy-button:active { background-color: #005f8a; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); transform: translateY(2px); }
+    .input-group { margin-bottom: 20px; width: 100%; max-width: 600px; }
+    .field-with-button { display: flex; align-items: center; gap: 10px; }
+    #monoKey { font-family: 'Courier New', monospace; white-space: pre; -webkit-text-security: disc; }
+    .enigma-settings { display:none; border:1px solid #4CAF50; padding:15px; border-radius:10px; background:#e8f0fe; }
 </style>
 </head>
 <body>
 <div class="content">
     <h1>הצפנה ופענוח סיסמאות</h1>
-    <div class="version">גרסה 1.3.2</div>
+    <div class="version">גרסה 1.3.3</div>
 
     <div class="input-group">
         <label for="cipherType">בחירת סוג צופן:</label>
@@ -129,6 +73,7 @@
             <option value="xor">XOR עם IV</option>
             <option value="vigenere">ריבוע ויז'נר</option>
             <option value="mono">מונואלפביטי</option>
+            <option value="enigma">אניגמה</option>
         </select>
     </div>
 
@@ -161,6 +106,22 @@
         </div>
     </div>
 
+    <!-- אניגמה -->
+    <div class="input-group enigma-settings" id="enigmaSettings">
+        <label>רוטור שמאלי:</label>
+        <select id="rotorLeft"></select>
+        <label>רוטור אמצעי:</label>
+        <select id="rotorMiddle"></select>
+        <label>רוטור ימני:</label>
+        <select id="rotorRight"></select>
+        <label>רפלקטור:</label>
+        <select id="reflector"></select>
+        <label>מיקום התחלתי (שלוש אותיות):</label>
+        <input id="rotorPositions" value="AAA">
+        <label>לוח מחברים (לדוגמה: AB CD EF):</label>
+        <input id="plugboard" value="">
+    </div>
+
     <div class="input-group">
         <label for="plainText">הכנס טקסט להצפנה:</label>
         <div class="field-with-button">
@@ -191,168 +152,134 @@
 </div>
 
 <script>
-function generateIV(n = 8) {
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let iv = '';
-    for (let i = 0; i < n; i++) iv += chars.charAt(Math.floor(Math.random() * chars.length));
-    return iv;
-}
-function combineKey(iv, key) {
-    const ivBytes = new TextEncoder().encode(iv);
-    const keyBytes = new TextEncoder().encode(key);
-    const combined = new Uint8Array(keyBytes.length);
-    for (let i = 0; i < keyBytes.length; i++) combined[i] = keyBytes[i] ^ ivBytes[i % ivBytes.length];
-    return combined;
-}
-function encryptWithIV(text, key) {
-    const iv = generateIV();
-    const combinedKey = combineKey(iv, key);
-    const textBytes = new TextEncoder().encode(text);
-    const encrypted = new Uint8Array(textBytes.length);
-    for (let i = 0; i < textBytes.length; i++) encrypted[i] = textBytes[i] ^ combinedKey[i % combinedKey.length];
-    const ivBytes = new TextEncoder().encode(iv);
-    const total = new Uint8Array(ivBytes.length + encrypted.length);
-    total.set(ivBytes, 0);
-    total.set(encrypted, ivBytes.length);
-    return uint8ToBase64(total);
-}
-function decryptWithIV(base64Input, key) {
-    const totalBytes = base64ToUint8(base64Input);
-    const ivLength = 8;
-    if (totalBytes.length < ivLength) return 'קלט לא תקין';
-    const ivBytes = totalBytes.slice(0, ivLength);
-    const encrypted = totalBytes.slice(ivLength);
-    const iv = new TextDecoder().decode(ivBytes);
-    const combinedKey = combineKey(iv, key);
-    const decrypted = new Uint8Array(encrypted.length);
-    for (let i = 0; i < encrypted.length; i++) decrypted[i] = encrypted[i] ^ combinedKey[i % combinedKey.length];
-    return new TextDecoder().decode(decrypted);
-}
-function uint8ToBase64(uint8Array) {
-    let binary = '';
-    for (let i = 0; i < uint8Array.byteLength; i++) binary += String.fromCharCode(uint8Array[i]);
-    return btoa(binary);
-}
-function base64ToUint8(base64) {
-    const binary = atob(base64);
-    const len = binary.length;
-    const bytes = new Uint8Array(len);
-    for (let i = 0; i < len; i++) bytes[i] = binary.charCodeAt(i);
-    return bytes;
-}
-function encryptVigenere(text, key) {
-    const result = [];
-    const keyCodes = key.split('').map(c => c.charCodeAt(0));
-    for (let i = 0; i < text.length; i++) result.push(String.fromCharCode(text.charCodeAt(i) ^ keyCodes[i % keyCodes.length]));
-    return result.join('');
-}
+// =================== קוד הצפנים הראשי ===================
+function generateIV(n = 8) { const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'; let iv = ''; for (let i = 0; i < n; i++) iv += chars.charAt(Math.floor(Math.random() * chars.length)); return iv; }
+function combineKey(iv, key) { const ivBytes = new TextEncoder().encode(iv); const keyBytes = new TextEncoder().encode(key); const combined = new Uint8Array(keyBytes.length); for (let i = 0; i < keyBytes.length; i++) combined[i] = keyBytes[i] ^ ivBytes[i % ivBytes.length]; return combined; }
+function encryptWithIV(text, key) { const iv = generateIV(); const combinedKey = combineKey(iv, key); const textBytes = new TextEncoder().encode(text); const encrypted = new Uint8Array(textBytes.length); for (let i = 0; i < textBytes.length; i++) encrypted[i] = textBytes[i] ^ combinedKey[i % combinedKey.length]; const ivBytes = new TextEncoder().encode(iv); const total = new Uint8Array(ivBytes.length + encrypted.length); total.set(ivBytes, 0); total.set(encrypted, ivBytes.length); return uint8ToBase64(total); }
+function decryptWithIV(base64Input, key) { const totalBytes = base64ToUint8(base64Input); const ivLength = 8; if (totalBytes.length < ivLength) return 'קלט לא תקין'; const ivBytes = totalBytes.slice(0, ivLength); const encrypted = totalBytes.slice(ivLength); const iv = new TextDecoder().decode(ivBytes); const combinedKey = combineKey(iv, key); const decrypted = new Uint8Array(encrypted.length); for (let i = 0; i < encrypted.length; i++) decrypted[i] = encrypted[i] ^ combinedKey[i % combinedKey.length]; return new TextDecoder().decode(decrypted); }
+function uint8ToBase64(uint8Array) { let binary = ''; for (let i = 0; i < uint8Array.byteLength; i++) binary += String.fromCharCode(uint8Array[i]); return btoa(binary); }
+function base64ToUint8(base64) { const binary = atob(base64); const len = binary.length; const bytes = new Uint8Array(len); for (let i = 0; i < len; i++) bytes[i] = binary.charCodeAt(i); return bytes; }
+function encryptVigenere(text, key) { const result = []; const keyCodes = key.split('').map(c => c.charCodeAt(0)); for (let i = 0; i < text.length; i++) result.push(String.fromCharCode(text.charCodeAt(i) ^ keyCodes[i % keyCodes.length])); return result.join(''); }
 function decryptVigenere(text, key) { return encryptVigenere(text, key); }
-function parseMonoMapping(mapping) {
-    const obj = {};
-    mapping.split(',').forEach(pair => {
-        const [from, to] = pair.split('=');
-        if (from && to) obj[from.trim()] = to.trim();
-    });
-    return obj;
-}
-function encryptMono(text, mapping) {
-    const map = parseMonoMapping(mapping);
-    return text.split('').map(c => map[c] || c).join('');
-}
-function decryptMono(text, mapping) {
-    const map = parseMonoMapping(mapping);
-    const reverseMap = Object.fromEntries(Object.entries(map).map(([k,v]) => [v,k]));
-    return text.split('').map(c => reverseMap[c] || c).join('');
-}
+function parseMonoMapping(mapping) { const obj = {}; mapping.split(',').forEach(pair => { const [from, to] = pair.split('='); if (from && to) obj[from.trim()] = to.trim(); }); return obj; }
+function encryptMono(text, mapping) { const map = parseMonoMapping(mapping); return text.split('').map(c => map[c] || c).join(''); }
+function decryptMono(text, mapping) { const map = parseMonoMapping(mapping); const reverseMap = Object.fromEntries(Object.entries(map).map(([k,v]) => [v,k])); return text.split('').map(c => reverseMap[c] || c).join(''); }
+
+// =================== קוד אניגמה ===================
+const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+const ROTORS = { I: { wiring: "EKMFLGDQVZNTOWYHXUSPAIBRCJ", notch: "Q" }, II: { wiring: "AJDKSIRUXBLHWTMCQGZNPYFVOE", notch: "E" }, III: { wiring: "BDFHJLCPRTXVZNYEIWGAKMUSQO", notch: "V" }, IV: { wiring: "ESOVPZJAYQUIRHXLNFTGKDCMWB", notch: "J" }, V: { wiring: "VZBRGITYUPSDNHLXAWMJQOFECK", notch: "Z" } };
+const REFLECTORS = { A: "EJMZALYXVBWFCRQUONTSPIKHGD", B: "YRUHQSLDPXNGOKMIEBFZCWVJAT", C: "FVPJIAOYEDRZXWGCTKUQSBNMHL" };
+
+class Rotor { constructor(wiring, notch, position) { this.wiring = wiring; this.notch = notch; this.position = ALPHABET.indexOf(position); } step() { this.position = (this.position + 1) % 26; } atNotch() { return ALPHABET[this.position] === this.notch; } forward(c) { let index = (ALPHABET.indexOf(c) + this.position) % 26; let encoded = this.wiring[index]; return ALPHABET[(ALPHABET.indexOf(encoded) - this.position + 26) % 26]; } backward(c) { let index = (ALPHABET.indexOf(c) + this.position) % 26; let encoded = ALPHABET[this.wiring.indexOf(ALPHABET[index])]; return ALPHABET[(ALPHABET.indexOf(encoded) - this.position + 26) % 26]; } }
+class Enigma { constructor(rotors, reflector, plugboard) { this.rotors = rotors; this.reflector = reflector; this.plugboard = plugboard; } plug(c) { for (let pair of this.plugboard) { if (pair[0] === c) return pair[1]; if (pair[1] === c) return pair[0]; } return c; } stepRotors() { if (this.rotors[1].atNotch()) { this.rotors[0].step(); this.rotors[1].step(); } else if (this.rotors[2].atNotch()) { this.rotors[1].step(); } this.rotors[2].step(); } encodeChar(c) { if (!ALPHABET.includes(c)) return c; this.stepRotors(); c = this.plug(c); for (let r of this.rotors.slice().reverse()) c = r.forward(c); c = this.reflector[ALPHABET.indexOf(c)]; for (let r of this.rotors) c = r.backward(c); c = this.plug(c); return c; } encode(text) { return text.toUpperCase().split("").map(c => this.encodeChar(c)).join(""); } }
+
+// =================== פונקציות עזר ===================
 function encrypt() {
     const cipher = document.getElementById('cipherType').value;
     const plainText = document.getElementById('plainText').value;
     let encrypted = '';
-    if (cipher === 'xor') {
-        const key = document.getElementById('key').value;
-        if (!key) { document.getElementById('encryptedText').value = 'יש להזין מפתח'; return; }
-        encrypted = encryptWithIV(plainText, key);
-    } else if (cipher === 'vigenere') {
-        const key = document.getElementById('vigenereKey').value;
-        if (!key) { document.getElementById('encryptedText').value = 'יש להזין מילת מפתח'; return; }
-        encrypted = encryptVigenere(plainText, key);
-    } else if (cipher === 'mono') {
-        const mapping = document.getElementById('monoKey').value;
-        if (!mapping) { document.getElementById('encryptedText').value = 'יש להזין החלפות'; return; }
-        encrypted = encryptMono(plainText, mapping);
-    }
+    try {
+        if (cipher === 'xor') {
+            const key = document.getElementById('key').value; if (!key) { document.getElementById('encryptedText').value = 'יש להזין מפתח'; return; }
+            encrypted = encryptWithIV(plainText, key);
+        } else if (cipher === 'vigenere') {
+            const key = document.getElementById('vigenereKey').value; if (!key) { document.getElementById('encryptedText').value = 'יש להזין מילת מפתח'; return; }
+            encrypted = encryptVigenere(plainText, key);
+        } else if (cipher === 'mono') {
+            const mapping = document.getElementById('monoKey').value; if (!mapping) { document.getElementById('encryptedText').value = 'יש להזין החלפות'; return; }
+            encrypted = encryptMono(plainText, mapping);
+        } else if (cipher === 'enigma') {
+            const rotorLeft = ROTORS[document.getElementById("rotorLeft").value];
+            const rotorMiddle = ROTORS[document.getElementById("rotorMiddle").value];
+            const rotorRight = ROTORS[document.getElementById("rotorRight").value];
+            const reflector = REFLECTORS[document.getElementById("reflector").value];
+            const positions = document.getElementById("rotorPositions").value.toUpperCase();
+            const plugPairs = document.getElementById("plugboard").value.trim().split(" ").filter(p => p.length===2);
+            const enigma = new Enigma(
+                [new Rotor(rotorLeft.wiring, rotorLeft.notch, positions[0]),
+                 new Rotor(rotorMiddle.wiring, rotorMiddle.notch, positions[1]),
+                 new Rotor(rotorRight.wiring, rotorRight.notch, positions[2])],
+                reflector.split(""),
+                plugPairs.map(p=>p.toUpperCase().split(""))
+            );
+            encrypted = enigma.encode(plainText);
+        }
+    } catch(e){ encrypted='קלט לא תקין'; }
     document.getElementById('encryptedText').value = encrypted;
 }
 function decrypt() {
     const cipher = document.getElementById('cipherType').value;
-    const encryptedInput = document.getElementById('encryptedInput').value.trim();
-    if (!encryptedInput) { document.getElementById('decryptedText').value = ''; return; }
+    const encryptedInput = document.getElementById('encryptedInput').value;
     let decrypted = '';
     try {
         if (cipher === 'xor') {
-            const key = document.getElementById('key').value;
-            if (!key) { document.getElementById('decryptedText').value = 'יש להזין מפתח'; return; }
+            const key = document.getElementById('key').value; if (!key) { document.getElementById('decryptedText').value = 'יש להזין מפתח'; return; }
             decrypted = decryptWithIV(encryptedInput, key);
         } else if (cipher === 'vigenere') {
-            const key = document.getElementById('vigenereKey').value;
-            if (!key) { document.getElementById('decryptedText').value = 'יש להזין מילת מפתח'; return; }
+            const key = document.getElementById('vigenereKey').value; if (!key) { document.getElementById('decryptedText').value = 'יש להזין מילת מפתח'; return; }
             decrypted = decryptVigenere(encryptedInput, key);
         } else if (cipher === 'mono') {
-            const mapping = document.getElementById('monoKey').value;
-            if (!mapping) { document.getElementById('decryptedText').value = 'יש להזין החלפות'; return; }
+            const mapping = document.getElementById('monoKey').value; if (!mapping) { document.getElementById('decryptedText').value = 'יש להזין החלפות'; return; }
             decrypted = decryptMono(encryptedInput, mapping);
+        } else if (cipher === 'enigma') {
+            const rotorLeft = ROTORS[document.getElementById("rotorLeft").value];
+            const rotorMiddle = ROTORS[document.getElementById("rotorMiddle").value];
+            const rotorRight = ROTORS[document.getElementById("rotorRight").value];
+            const reflector = REFLECTORS[document.getElementById("reflector").value];
+            const positions = document.getElementById("rotorPositions").value.toUpperCase();
+            const plugPairs = document.getElementById("plugboard").value.trim().split(" ").filter(p => p.length===2);
+            const enigma = new Enigma(
+                [new Rotor(rotorLeft.wiring, rotorLeft.notch, positions[0]),
+                 new Rotor(rotorMiddle.wiring, rotorMiddle.notch, positions[1]),
+                 new Rotor(rotorRight.wiring, rotorRight.notch, positions[2])],
+                reflector.split(""),
+                plugPairs.map(p=>p.toUpperCase().split(""))
+            );
+            decrypted = enigma.encode(encryptedInput);
         }
-    } catch (e) { decrypted = 'קלט לא תקין לפענוח'; }
+    } catch(e){ decrypted='קלט לא תקין'; }
     document.getElementById('decryptedText').value = decrypted;
 }
-function copyToClipboard(id) {
-    const el = document.getElementById(id);
-    el.select();
-    el.setSelectionRange(0, 99999);
-    document.execCommand('copy');
-    alert('הועתק ללוח: ' + el.value);
+
+function toggleVisibility(id) { const el = document.getElementById(id); if(el.type==='password') el.type='text'; else if(el.type==='text') el.type='password'; else el.style.display=(el.style.display==='none'?'block':'none'); }
+function toggleMonoKeyVisibility() { const el=document.getElementById('monoKey'); el.style.display=(el.style.display==='none'?'block':'none'); }
+
+function copyToClipboard(id) { const text = document.getElementById(id); text.select(); text.setSelectionRange(0, 99999); navigator.clipboard.writeText(text.value); alert("הטקסט הועתק"); }
+
+// שינוי תצוגה לפי סוג הצופן
+document.getElementById('cipherType').addEventListener('change', function() {
+    const cipher=this.value;
+    document.getElementById('keyGroup').style.display=(cipher==='xor')?'block':'none';
+    document.getElementById('vigenereKeyGroup').style.display=(cipher==='vigenere')?'block':'none';
+    document.getElementById('monoKeyGroup').style.display=(cipher==='mono')?'block':'none';
+    document.getElementById('enigmaSettings').style.display=(cipher==='enigma')?'block':'none';
+});
+
+// למלא את הבחירות של אניגמה
+for (let key in ROTORS) {
+    for (let id of ["rotorLeft","rotorMiddle","rotorRight"]) {
+        let opt = document.createElement("option"); opt.value = key; opt.textContent = key;
+        document.getElementById(id).appendChild(opt.cloneNode(true));
+    }
 }
-function toggleVisibility(id) {
-    const el = document.getElementById(id);
-    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') el.type = el.type === 'password' ? 'text' : 'password';
-}
-function toggleMonoKeyVisibility() {
-    const el = document.getElementById('monoKey');
-    if (el.style.webkitTextSecurity === 'disc') el.style.webkitTextSecurity = 'none';
-    else el.style.webkitTextSecurity = 'disc';
+for (let key in REFLECTORS) {
+    let opt = document.createElement("option"); opt.value = key; opt.textContent = key;
+    document.getElementById("reflector").appendChild(opt);
 }
 
-// Event listeners
-document.getElementById('cipherType').addEventListener('change', () => {
-    const cipher = document.getElementById('cipherType').value;
-    document.getElementById('keyGroup').style.display = cipher === 'xor' ? 'block' : 'none';
-    document.getElementById('vigenereKeyGroup').style.display = cipher === 'vigenere' ? 'block' : 'none';
-    document.getElementById('monoKeyGroup').style.display = cipher === 'mono' ? 'block' : 'none';
-    encrypt();
-    decrypt();
-});
-document.getElementById('monoType').addEventListener('change', () => {
-    const type = document.getElementById('monoType').value;
-    const mono = document.getElementById('monoKey');
-    const monoField = document.getElementById('monoField');
-    const monoLabel = document.getElementById('monoLabel');
-    if (type === 'etbash') {
-        mono.value = 'א=ת,ב=ש,ג=ר,ד=ק,ה=צ,ו=ן,ז=מ,ח=פ,ט=כ,י=ל,כ=י,ל=כ,מ=ז,נ=ו,ס=ט,ע=ח,פ=ח,צ=ה,ק=ד,ר=ג,ש=ב,ת=א,A=Z,B=Y,C=X,D=W,E=V,F=U,G=T,H=S,I=R,J=Q,K=P,L=O,M=N,N=M,O=L,P=K,Q=J,R=I,S=H,T=G,U=F,V=E,W=D,X=C,Y=B,Z=A';
-        monoField.style.display = 'none';
-        monoLabel.style.display = 'none';
-    } else {
-        mono.value = '';
-        monoField.style.display = 'flex';
-        monoLabel.style.display = 'block';
-    }
-    encrypt();
-    decrypt();
-});
-document.getElementById('key').addEventListener('input', () => { encrypt(); decrypt(); });
-document.getElementById('vigenereKey').addEventListener('input', () => { encrypt(); decrypt(); });
-document.getElementById('monoKey').addEventListener('input', () => { encrypt(); decrypt(); });
+// הרצת הצפנה/פענוח בלחיצה
 document.getElementById('plainText').addEventListener('input', encrypt);
 document.getElementById('encryptedInput').addEventListener('input', decrypt);
+document.getElementById('key').addEventListener('input', function(){encrypt(); decrypt();});
+document.getElementById('vigenereKey').addEventListener('input', function(){encrypt(); decrypt();});
+document.getElementById('monoKey').addEventListener('input', function(){encrypt(); decrypt();});
+document.getElementById('rotorPositions').addEventListener('input', function(){encrypt(); decrypt();});
+document.getElementById('plugboard').addEventListener('input', function(){encrypt(); decrypt();});
+document.getElementById('rotorLeft').addEventListener('change', function(){encrypt(); decrypt();});
+document.getElementById('rotorMiddle').addEventListener('change', function(){encrypt(); decrypt();});
+document.getElementById('rotorRight').addEventListener('change', function(){encrypt(); decrypt();});
+document.getElementById('reflector').addEventListener('change', function(){encrypt(); decrypt();});
+
 </script>
 </body>
 </html>
